@@ -1,0 +1,63 @@
+#include<iostream>
+using namespace std;
+
+double average(const double score[], int n);  //返回n个double型元素的一维数组score的平均分
+int display(const double score[], int n, double avg); //输出数组score中低于avg的序号和成绩,返回低于avg的个数
+int input(double score[], double end);   //输入一组数值到数组中，返回输入的个数，以-1表示输入结束
+
+const int N = 30;
+int main()
+{
+    double a[N];
+    const double END = -1;
+    int n = input(a, END);  //调用input函数输入一组数据到数组a中，遇END结束，返回输入个数，即n是数组a的实际长度
+
+    double avg = average(a, n);
+    cout << "average is " << avg << endl;
+    int num = display(a, n, avg);   //输出低于平均分的学生序号和成绩
+    cout << "There are " << num;
+    return 0;
+}
+int input(double score[], double end)
+{
+    double value;
+    cin >> value;
+    int count = 0;
+    while (value != end && count < N)
+    {
+        score[count] = value;
+        count++;
+        cin >> value;
+    }
+    return count;
+}
+double average(const double score[], int n) {
+    int sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += score[i];
+    }
+    double avg = (static_cast<double>(sum)) / n;
+
+    return avg;
+}
+
+int display(const double score[], int n, double avg) {
+    
+    double sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += score[i];
+    }
+    
+    avg = (static_cast<double>(sum)) / n;
+   
+    int count = 0;
+    
+    for (int i = 0; i < n; i++) {
+        if (score[i] < avg) {
+            cout << i << ":" << score[i] << endl;
+            count++;
+        }
+    }
+    return count;
+
+}
