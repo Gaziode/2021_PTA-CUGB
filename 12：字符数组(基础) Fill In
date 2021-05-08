@@ -1,0 +1,28 @@
+#include<iostream>
+using namespace std;
+void insertString (char str[], char c);
+
+int main()
+{
+	char str[100],c;
+	cin.getline(str,99);
+	cin>>c;
+	
+insertString (str,  c);
+
+	cout<<str<<endl;
+	return 0;
+}
+void insertString (char str[], char c)
+{
+	int n,i;
+	for(n=0;str[n]!=0;n++)
+		;
+	str[n+1]='\0';
+	for(i=n-1;i>=0;i--)
+		if(str[i]>c)
+			str[i+1]=str[i];
+		else
+			break;
+	str[i+1]=c;
+}
