@@ -1,0 +1,24 @@
+#include<iostream> 
+#include<string.h>
+using namespace std;
+
+int main(){
+	char str[101]={0};
+	cin.getline(str,101);
+	int n=strlen(str);
+	int num=0;
+	cin>>num;
+	if(num>n)
+		num%=n;
+	
+	for(int i=0;i<num;i++){
+		char temp=str[0];
+		for(int j=0;j<n-1;j++){
+			str[j]=str[j+1];
+		}
+		str[n-1]=temp;
+	}
+	
+	cout<<str<<endl;
+	return 0;
+}
