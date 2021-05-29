@@ -1,0 +1,18 @@
+Point::Point(double xx, double yy) {
+    x = 0, y = 0;
+    x = xx, y = yy;
+}
+void Point::Set(double xx, double yy) {
+    x = xx;
+    y = yy;
+}
+void Point::Output() {
+    cout << "(" << x << "," << y << ")" << endl;
+}
+double Point::GetDis(Point&p) {
+    double dis = 0;
+    double a = pow(GetX() - p.GetX(), 2);
+    double b = pow(GetY() - p.GetY(), 2);
+    dis = sqrt(a + b);
+    return dis;
+}
