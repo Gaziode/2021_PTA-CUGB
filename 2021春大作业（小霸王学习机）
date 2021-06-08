@@ -1,0 +1,494 @@
+#include<iostream>
+#include <cstdlib>
+#include "windows.h"
+#include <conio.h>
+#include<cmath> 
+#include<stdlib.h>
+#include<time.h>
+//头文件部分
+using namespace std;
+
+bool wan(int num);//完数判断函数
+bool narcissistic( int number ); //水仙花数判断函数
+bool oddandeven(int i_num);//奇数偶数判断函数
+bool isPrime(int num);//素数判断函数
+//自定义函数部分
+
+int main() {
+	//变量定义区
+	
+		int temp = 0;//用户选择变量
+		int tem = 0;//临时变量
+		int i = 0;//case1变量
+		char uname[50]{};//用户名称临时变量
+		bool isPrime(int num);
+	
+
+	//积分功能结构体
+		struct recording {
+			char username[50];//用户名称
+			int record = 0;//用户积分
+		}record;
+
+	recording record1;
+
+	//主界面部分
+	{
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+		cout << "please tell me your name, warrior.//请输入你的名字" << endl;
+		cin.getline(uname,50);
+		strcpy(record1.username, uname);
+		cout << record1.username << ", Welcome to 4DS learning station!(゜A。)" << "//"<<record1.username<<",欢迎来到小霸王学习机系统！！"<<endl;
+		cout<<"-Press Any Button to Continue-"<<endl;
+		system("pause"); 
+		cout << "---------------------  [ UnderC++ ]开始游戏  ---------------------" << endl;
+		cout << "                            请选择选项                            " << endl;
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);//set yellow
+		cout << "【积分游戏】【1】Is this a perfect number?//这是完数吗？" << endl;
+		cout << "【学习工具】【2】Do arithmetic//四则运算"<<endl;	
+		cout<<"【积分游戏】【3】Is this an narcissistic number?//这是水仙花数吗？" << endl;
+		cout << "【积分游戏】【4】Is this an even or odd number？//这是奇数还是偶数？"<<endl;
+		cout<<"【积分游戏】【5】Is this a prime number//这是素数吗？" << endl;
+		cout << "【积分游戏】【6】Peer tacit understanding ordeal//同伴默契考验！" << endl;
+		cout<<"【积分游戏】【7】1/8 Octopath:The Warrior and The Dragon beta//(回合制游戏)一方旅人：勇者斗恶龙"<<endl;
+		cout << "【系统功能】【8】current record//查询当前积分" << endl;
+		cout << "【系统功能】【0】Exit" << endl;
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+		cout << "------------------------  [ Have Fun! ]  ------------------------" << endl;
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);//set original color
+	}
+	//选择功能
+	//while实现循环界面
+	while (1) {
+		//选择界面代码
+		{
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+		cout << "current location: main menu//您当前的位置为：选择界面" << endl;
+		cout << "press correct number to start the game//输入正确数字以开始游戏" << endl;
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);//set original color
+		}
+		cin >> temp;//用户输入
+		char flag = 'y';//正确输入判断变量
+		//switch选择及本程序功能主体
+		switch (temp)
+		{
+		//case1：wan number 
+		case 1: {
+			//初始界面
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+			cout << "*******************current location:is this a wan number?//这是完数吗？*******************" << endl;
+			cout << "enter your number//输入你的数字" << endl;
+			cout << "example for wan number//完数样例" << endl;
+			//判断及现实功能实现部分
+			for (int i = 3; i <= 1000; i++) {
+
+				if (wan(i) == true) {
+
+					cout << i << "=" << 1;
+
+					for (int j = 2; j < i; j++) {
+
+						if (i % j == 0) {
+							cout << "+" << j;
+						}
+					}
+
+					cout << endl;
+				}
+			}
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);//set original color
+			cin >> i;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+
+
+
+			if (i <= 0) {
+				cout << "Please enter correct character!" << endl;
+				break;
+			}
+
+			if (wan(i) == true) {
+
+				record1.record++;
+
+				cout << "yes,it is.//是完数！！" << endl;
+
+				cout << i << "=" << 1;
+
+				for (int j = 2; j < i; j++) {
+
+					if (i % j == 0) {
+						cout << "+" << j;
+					}
+				}
+
+				cout << endl;
+			}
+			else
+				cout << "no,it isn't.//不是完数" << endl;
+			break;
+		}
+		//case2:arithmetic
+		case 2:
+			{
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+			cout << "*******************current location:Do arithmetic//四则运算*******************" << endl;
+				char op;
+				double y,a,b;
+				printf("此选项可进行四则运算\n");
+				printf("在下方输入你想要进行的运算\n");
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);//set original color
+				scanf("%lf%c%lf",&a,&op,&b) ;
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+				switch(op)
+				{
+					case'+':
+						y=a+b;
+						break;
+	
+					case'-':
+						y=a-b;
+						break;
+	
+					case'*':
+						y=a*b;
+						break;
+	
+					case'/':
+						y=(b!=0)?(a/b):0;
+						break;
+	
+					default:
+						break; 
+				}
+				printf("结果是：%g%c%g=%g\n",a,op,b,y);
+				break;
+			}
+		//case3:narcissistic number
+		case 3:
+		{
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+			cout << "*******************current location:is this an narcissistic number?//这是水仙花数吗？*******************" << endl;
+			cout << "enter your number//输入你的数字" << endl;
+			cout << "example for narcissistic number//水仙花数样例：153=1*1*1+5*5*5+3*3*3" << endl;
+			int m;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);//set original color
+  			cin>>m;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+			if (narcissistic(m) == true) {
+				record1.record++;
+				cout << m << " is a narcissistic number." << endl;
+			}
+   			 else
+         		cout<<m<<" is not a narcissistic number."<<endl;
+			break;
+		}
+		//case4:oddandeven
+		case 4:
+		{
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+		cout << "*******************current location:Is this an even or odd number？//这是奇数还是偶数？*******************" << endl;
+		cout << "current rule:if it is an even number,you get one point!//如果输入的数是偶数，则加一分" << endl;
+		cout << "enter your number//输入你的数字" << endl;
+			int num;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);//set original color
+			cin>>num;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+			bool result=oddandeven(num);
+			if(result==1)
+			{
+				cout<<num<<" is an even number"<<endl;
+				record1.record++;
+			}
+			else
+			{
+				cout<<num<<" is an odd number"<<endl;
+			}
+			break;
+		} 
+		//case5:素数判断
+		case 5: {
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+			cout << "*******************current location:Is this a prime number//这是素数吗？*******************" << endl;
+			cout << "current rule:if it is a prime number,you get one point!//如果输入的数为素数，则加一分" << endl;
+			cout << "请输入一个1到1000的数：" << endl;
+
+			int num;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);//set original color
+			cin >> num;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+			if (isPrime(num) == true) {
+				record1.record++;
+				cout << num << " 是素数!\n";
+			}
+			else
+				cout << num << " 不是素数!\n";
+			
+			break;
+
+		}
+		//case6:同伴默契考验
+		case 6: {
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+			cout << "*******************current location:Peer tacit understanding ordeal//同伴默契考验！*******************" << endl;
+			cout << "current rule:if success, you get one point!!//如果成功，则加一分！" << endl;
+
+			int m, i;
+			const int T = 5;
+			cout << "请输入一个数：" << endl;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);//set original color
+			cin >> m;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+			cout << "接下来请你的同伴来猜你刚才输入的数" << endl;
+			for (i = 1; i <= T; i++)
+
+			{
+				int a;
+				cin >> a;
+				if (a > m)
+					cout << "猜大了" << endl;
+				if (a < m)
+					cout << "猜小了" << endl;
+				if (a == m)
+					break;
+			}
+
+			if (i <= T) {
+				record1.record++;
+				cout << "猜对了";
+			}
+			if (i > T)
+				cout << "游戏失败";
+
+			break;
+		}
+		//case8:check record
+		case 8: {
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+			cout << "*******************current location:record check//查询成绩*******************" << endl;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);//set yellow
+			cout << "your current record is: " << record1.record << " (゜A。)" << endl;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);//set original color
+			break;
+		}
+		//case7:TWaTD
+		case 7:{
+			//主界面部分 
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+			cout << "*******************current location:The Warrior and The Dragon beta//勇者斗恶龙*******************" << endl;
+			cout<<"Welcome to the jungle, //欢迎来到丛林"<<record1.username<<" ,the legend warrior!//传说中的勇士！"<<endl;
+			cout<<"规则：与随机敌人展开回合制战斗，每回合随机防御值。战胜敌人就是胜利！！"<<endl;
+			cout<<"-Press Any Button to Continue-"<<endl;
+			system("pause");
+			cout<<"creating your warrior...//正在创造你的勇士..."<<endl;
+			
+			srand((unsigned)time(NULL));//随机数初始化 
+			
+			{//player's data玩家数值定义 
+			
+				int t1=0,tatk=0,tbatk=0;
+				int hp=0;
+				int df=0;
+				int atk=0;
+			
+			//boss's data敌人数值定义 
+			
+				int bhp=0;
+				int bdf=0;
+				int batk=0;
+				int esc=2;
+			
+			
+			
+			hp= (rand() % (50-10+1))+ 10;//玩家生命随机值 
+			atk= (rand() % (20-5+1))+ 5;//玩家攻击随机值 
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);//set yellow
+			cout<<"你的生命值为 "<<hp<<" 你的攻击力为 "<<atk<<endl;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+			cout<<"creating the enemy...//正在创造敌人"<<endl;
+			bhp= (rand() % (50-20+1))+ 20;//敌人生命随机值 
+			batk= (rand() % (7-5+1))+ 5;//敌人攻击随机值 
+			cout<<"-Press Any Button to Continue-"<<endl;
+			system("pause");
+			cout<<"start battle!!//开始战斗！！"<<endl;
+			while(bhp>0&&hp>0){
+				srand((unsigned)time(NULL));//随机数初始化 
+				cout<<"Press 1 to attack, 2 to defence, 3 to check enemy's hp, 4 to check enemy's atk, 5 to try to escape"<<endl;
+				cout<<"按下 1 以攻击, 按下 2 以防御或尝试恢复, 按下 3 以侦察敌人的生命值, 按下 4 以侦察敌人的攻击力, 按下 5 以尝试逃跑"<<endl;
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);//set yellow
+				cout<<"你当前的生命值为 "<<hp<<" 你的攻击力为 "<<atk<<endl;
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);//set original color
+				cin>>t1;
+				
+				tatk=atk;//玩家真实攻击初始化 
+				tbatk=batk;//敌人真实攻击初始化 
+				
+				bdf=(rand() % (5-1+1))+ 1;//敌人防御随机值 
+				tatk=atk-bdf;//玩家真实攻击 
+				df=(rand() % (10-1+1))+ 1;//玩家防御随机值 
+				
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+				//your round
+				switch(t1){
+					case 1:{//玩家攻击 
+						bhp-=tatk;//对敌人造成真实伤害 
+						SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);//set yellow
+						cout<<"你对敌人造成了 "<<tatk<<" 点伤害，干得漂亮！"<<endl;
+						SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+						break;
+					}
+					case 2:{//玩家防御 
+						tbatk=batk-df;//防御后敌人攻击赋值 
+						break;
+					}
+					case 3:{//玩家侦察敌人生命 
+						SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);//set yellow
+						cout<<"enemy's current hp is //敌人的生命值为"<<hp<<endl;
+						SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+						break;
+					}
+					case 4:{//玩家侦察敌人攻击 
+						SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);//set yellow
+						cout<<"enemy's atk is //敌人的攻击力为"<<atk<<endl;
+						SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+						break;
+					}
+					case 5:{//玩家试图逃脱 
+						esc=(rand() % (1-0+1))+ 0;
+						break;
+					}
+					default:{//玩家错误输入 
+						SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);//set yellow
+						cout<<"please enter correct number!!//请输入正确数字！！"<<endl;
+						SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+					}
+				}
+				
+				if(esc==1)//逃脱判断 
+					break;
+				//enemy's round
+				hp=hp-tbatk;//敌人对玩家造成伤害 
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);//set yellow
+				cout<<"敌人对你造成了 "<<tbatk<<" 点伤害！！"<<endl;
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+				
+			}
+			if(bhp<0&&esc!=1)
+			{
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);//set yellow
+				cout<<"You beat the enemy, corrgratulations, the Mighty Warrior, //你战胜了敌人，祝贺你，勇士"<<record1.username<<" !!"<<endl;
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+				record1.record++;
+				break;
+			}
+			else if(hp<0&&esc!=1){
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);//set yellow
+				cout<<"You lost, try hard next time, //你失败了，下次继续努力"<<record1.username<<" ..."<<endl;
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+				break;
+			}
+			else if(esc==1){
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);//set yellow
+				cout<<"Escape success!!//成功逃脱！！"<<endl;
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+			}
+			else{
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);//set yellow
+				cout<<"Escape failed, face your fate, WARRIOR!//逃脱失败，直面你的命运吧，勇士！！"<<endl;
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue}
+			break;}
+		}
+		}
+		//case0:exit
+		case 0:
+		{
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//set blue
+			cout << "You really wanna exit?" << endl;
+			cout << "Y/N" << endl;
+			cin >> flag;
+			if (flag == 'Y' || flag == 'y') {
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);//set yellow
+				cout << "Authors" << endl;
+				cout << "main menu design:PVC" << endl;
+				cout << "function designers:" << endl;
+				cout << "Dog's name can also be Tom" << endl;
+				cout << "Ding-ding car" << endl;
+				cout << "HaHa" << endl;
+				cout << "Thanks for playing!!" << endl;
+				cout<<"-Press Any Button to EXIT-//按任意键退出"<<endl;
+				system("pause"); 
+				exit(0);
+			}
+			else if (flag == 'N' || flag == 'n')
+				break;
+			else
+				cout << "Please enter correct character!" << endl;
+			break;
+		}
+		default:cout << "Please enter correct character!" << endl;
+			break;
+		}
+	}
+
+	return 0;
+
+}
+//完数判断函数主体
+bool wan(int num)//game2 wan number
+{
+	int sum = 0;
+
+	for (int j = 1; j < num; j++) {
+		if (num % j == 0) {
+			sum += j;
+		}
+	}
+	if (sum == num) {
+		return true;
+	}
+	else
+		return false;
+}
+//水仙花数判断函数主体
+bool narcissistic( int number )
+{
+	int gw,sum=0,num=number;
+	for(int n=0;n<=3;n++)
+	{
+		gw=number%10;
+		sum=sum+gw*gw*gw;
+		number=number/10; 
+	}
+	if(sum==num)
+	{
+		return true; 
+	}
+	else
+	{
+		return false;
+	}	
+}
+//奇数偶数判断函数主体
+bool oddandeven(int i_num)
+{
+	if(i_num%2==0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+//素数判断函数主体
+bool isPrime(int num)
+{
+	int i, k = sqrt(num);
+	for (i = 2; i <= k; i++)
+		if (num % i == 0)
+			break;
+	if (i <= k)
+		return false;
+	else
+		return true;
+}
