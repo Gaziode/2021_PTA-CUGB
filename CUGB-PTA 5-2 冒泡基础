@@ -8,7 +8,7 @@ int main()
 	for(i=0;i<N;i++)
 		cin>>a[i];
 	
-BubbleSort(a,N);
+	BubbleSort(a,N);
 
 	for(i=0;i<N;i++)
 		cout<<a[i]<<" ";
@@ -17,11 +17,11 @@ BubbleSort(a,N);
 void BubbleSort(int a[],int n)
 {
 	int i,j;
-	for(j=0;j<n;j++)
-		for(i=0;i<n-j;i++)
+	for(j=0;j<n;j++)//运行次数为数组中的元素个数
+		for(i=0;i<n-j;i++)//每次比较n-j次
 			if(a[i]>a[i+1])
 			{
-				int t=a[i];
+				int t=a[i];//将较大的数移到数组的末尾
 				a[i]=a[i+1];
 				a[i+1]=t;
 			}	
