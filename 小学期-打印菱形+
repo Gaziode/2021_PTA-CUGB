@@ -1,0 +1,24 @@
+#include<cstdio>
+#include<cmath>
+int main() {
+	int x = 0;
+	int y = 0;
+	int temp = 0;
+	int j = 0;
+	scanf_s("%d", &temp);
+	for (int i = 0; i < temp; i++) {
+		for (j = 0; j < temp - 1 - i; j++)
+			printf(" ");
+		for (j = 0; j < 2 * i + 1; j++)
+			printf("*");
+		printf("\n");
+	}
+	for (int i = 0; i < temp - 1; i++) {
+		for (j = 0; j <= i; j++)
+			printf(" ");
+		for (j = 0; j < 2 * (temp - 1 - i) - 1; j++)
+			printf("*");
+		printf("\n");
+	}
+	return 0;
+}
