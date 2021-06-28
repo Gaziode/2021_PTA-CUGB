@@ -1,0 +1,24 @@
+#include<cstdio>
+#include<string.h>
+int main() {
+	char s[300] = { 0 };
+	fgets(s,300,stdin);
+	int len = strlen(s);
+	char* p = s;
+	int c = 0, l = 0, b = 0, n = 0, o = 0;
+	for (int i = 0; s[i] != '\0'; i++) {
+		if (*(p + i) >= 'A' && *(p + i) <= 'Z')
+			c++;
+		else if (*(p + i) >= 'a' && *(p + i) <= 'z')
+			l++;
+		else if (*(p + i) >= '0' && *(p + i) <= '9')
+			n++;
+		else if (*(p + i) == ' ')
+			b++;
+	}
+	o = len - c - l - b - n - 1;
+	printf("the number of capitals is %d\nthe number of lowers is %d\nthe number of blocks is %d\nthe number of numbers is %d\nthe number of other characters is %d", c, l, b, n, o);
+	return 0;
+}
+
+
