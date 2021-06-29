@@ -1,0 +1,115 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<cstdio>
+#include<fstream>
+#include<stdlib.h>
+#include<algorithm>
+using namespace std;
+
+//全局变量声明
+int cnt = 0, capscnt = 0, newcnt = 0;//cnt=单词个数,caps cnt=大写字母个数,newcnt=新单词个数（结构体）
+char str[255][255];//用来记录所有拆分的单词
+
+//结构体
+struct word {
+	char word[255];//可以记录长度在255以内的单词
+	int num;//记录频率
+}new_word[255];//可以记录255个单词
+
+//预处理
+void sorting(char* c) {
+	int num = 0;//记录每行单词长度
+	for (int i = 0; i < strlen(c); i++) {//遍历字符数组C
+		if (c[i] >= 'a' && c[i] <= 'z') {//遇到的字母是小写时，直接写入二维数组并列数+1
+			str[cnt][num] = c[i];//将该字母放进STR，下同
+			num++;//本行字母数（列数）+1
+		}
+		else if (c[i] >= 'A' && c[i] <= 'Z') {//遇到的字母是大写时，改为小写写入二维数组，且列数和大写计数均+1
+			str[cnt][num] = char(c[i] + 32);
+			capscnt++;
+			num++;
+		}
+		else if (c[i - 1] >= 'a' && c[i - 1] <= 'z' || c[i - 1] >= 'A' && c[i - 1] <= 'Z')//遇到特殊字符时中断，进入下一行
+		{
+			str[cnt][num + 1] = '\0';//单词屁股加0
+			cnt++;//行数（即单词数）+1，下同
+			num = 0;//清空列计数，下同
+		}
+		
+	}
+	if (c[strlen(c) - 1] >= 'a' && c[strlen(c) - 1] <= 'z' || c[strlen(c) - 1] >= 'A' || c[strlen(c) - 1] <= 'Z')//遇到字符数组末尾，加0
+	{
+		str[cnt][num + 1] = '\0';//单词屁股加0
+		cnt++;
+		num = 0;
+	}
+}
+
+//用结构体判断是否为新单词
+bool judge(int i) {
+	if (newcnt == 0)//第一个单词不进入判断循环
+		return true;//返回真，在主函数中进行复制处理
+	else {
+		for (int j = 0; j < newcnt; j++) {//遍历已有新单词
+			if (strcmp(str[i], new_word[j].word) == 0) {//现字符数组与已有新单词相同
+				new_word[j].num++;//旧单词在结构体中记录数据+1
+				return false;//返回假，主函数中不处理
+			}
+		}
+		return true;//返回真，在主函数中进行复制处理
+	}
+}
+
+//sort函数排序
+bool cmp(word a, word b) {
+	return a.num < b.num;
+}
+
+//主函数
+int main(){
+
+	//打开文件
+	FILE* fp = fopen("C://APEsavanna//APE.txt", "r");
+	FILE* f = fopen("C://APEsavanna//output.txt", "w");
+	
+	char temp[255]{};//用于按空格拆分单元
+
+	if (fp == NULL) {//判断打开是否成功
+		printf("Error occucered during openning the File1\n");
+		exit(0);
+	}
+	else
+		printf("File openning success\n");
+
+	//EOF前，对文本进行输入和预先处理
+	while (EOF != fscanf(fp, "%s", temp)) {
+		fscanf(f, "%s", temp);//拆分单元
+		sorting(temp);//预处理，将小写单词记录到STR字符数组中
+	}
+	for (int i = 0; i < cnt; i++) {
+		printf("%s\n", str[i]);//打印到屏幕
+		fprintf(f, "%s\n", str[i]);//打印到新文件
+	}
+	
+	for (int i = 0; i < cnt; i++) {//遍历STR数组，统计新单词和频率
+		if (judge(i)) {//调用新单词判断函数进行判断
+			strcpy(new_word[newcnt].word, str[i]);//返回真，记录新单词
+			new_word[newcnt].num++;//第一次遇到，计数+1
+			newcnt++;//单词表数量+1
+		}
+	}
+
+	sort(new_word, new_word + newcnt - 1, cmp);//按出现频率排序
+
+	printf("大写字母的个数是:%d\n", capscnt);//以下均为输出
+	printf("总单词数为:%d\n", cnt);
+	fprintf(f, "大写字母的个数是:%d\n", capscnt);//输出到文件
+	fprintf(f, "总单词数为:%d\n", cnt);
+	for (int i = 0; i < newcnt-1; i++) {
+		printf("%s:%d\n", new_word[i].word,new_word[i].num);
+		fprintf(fp, "%s:%d\n", new_word[i].word,new_word[i].num);
+	}
+
+	//关闭文件
+	fclose(f);
+	fclose(fp);
+}
